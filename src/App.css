@@ -1,0 +1,87 @@
+body {
+  height: 100px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+header .logo img {
+  height: 40px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+header .auth-buttons button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+}
+
+main .hero {
+  height: 175px;
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f4f4f4;
+}
+
+main .hero h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+main .hero button {
+
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+main .impact-stats {
+  height: 150px;
+  text-align: center;
+  padding: 20px;
+  background-color: #e0e0e0;
+}
+
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+footer .footer-links a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+footer .contact-info p {
+    margin: 5px 0;
+}
