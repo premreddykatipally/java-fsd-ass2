@@ -1,27 +1,37 @@
 import React from 'react';
-import logo from './logo.png'; // Import the logo
+import { Link, useNavigate } from 'react-router-dom';
+import logo from './logo.png';
 
 const Header = () => {
+    const navigate = useNavigate();
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true"; // Check login state
+
+    const handleLogout = () => {
+        localStorage.removeItem("isAuthenticated"); // Remove login state
+        navigate("/Login"); // Redirect to login page
+    };
+
     return (
-        <header>
+        <header className="header">
             <div className="logo">
-                <img src={logo.png} alt="Red Cross Logo" /> {/* Use the imported logo */}
+                <img src={logo} alt="Red Cross Logo" />
             </div>
             <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Donation Guidelines</a></li>
-                    <li><a href="#">FAQs</a></li>
-                </ul>
-            </nav>
-            <div className="auth-buttons">
-                <button>Login</button>
-                <button>Sign Up</button>
-            </div>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About Us</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/donation-guidelines">Donation Guidelines</a></li>
+    <li><a href="/faqs">FAQs</a></li>
+  </ul>
+  <div className="auth-buttons">
+    <button><a href="/login">Login</a></button>
+    <button><a href="/signup">SignUp</a></button>
+  </div>
+</nav>
+
         </header>
     );
-};
+};<br/>
 
 export default Header;

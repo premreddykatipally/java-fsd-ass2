@@ -1,0 +1,71 @@
+/* Full-page styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: powderblue;
+}
+
+/* Centering the login container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Login Box */
+.login-box {
+    background: linear-gradient(135deg, lightpink, lightcoral);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+    font-family: Verdana, sans-serif;
+}
+
+/* Input Fields & Button */
+input, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background: darkred;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: crimson;
+}
+
+/* Optional: Remove First Aid Animation */
+.first-aid-symbol {
+    display: none;
+}
+.signup-text {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.signup-text a {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
