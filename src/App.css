@@ -43,6 +43,11 @@ header .logo img {
   width: auto;
 }
 
+/* Home Link */
+header .logo a {
+  margin-left: 10px; /* Add gap between logo and home link */
+}
+
 /* Navigation Styling */
 header nav {
   display: flex;

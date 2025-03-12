@@ -4,6 +4,10 @@ const Footer = () => {
     return (
         <footer>
             <div className="footer-links">
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact</a>
+                <a href="/donation-guidelines">Donation Guidelines</a>
+                <a href="/faqs">FAQs</a>
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Service</a>
             </div>

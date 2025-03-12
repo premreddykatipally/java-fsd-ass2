@@ -11,8 +11,12 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        // Dummy authentication logic (Replace with API call)
-        if (email === "admin@example.com" && password === "password") {
+        // Retrieve user data from local storage
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+
+        // Validate credentials
+        if (storedUser && storedUser.email === email && storedUser.password === password) {
+            localStorage.setItem("isAuthenticated", "true"); // Set authentication state
             alert("Login successful!");
             navigate("/"); // Redirect to home
         } else {
