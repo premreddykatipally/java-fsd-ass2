@@ -11,16 +11,19 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        // Retrieve user data from local storage
-        const storedUser = JSON.parse(localStorage.getItem("user"));
+        // Retrieve user data from local storage using same key pattern as SignUp
+        const storedUser = JSON.parse(localStorage.getItem(`user_${email}`));
 
         // Validate credentials
-        if (storedUser && storedUser.email === email && storedUser.password === password) {
-            localStorage.setItem("isAuthenticated", "true"); // Set authentication state
-            alert("Login successful!");
-            navigate("/"); // Redirect to home
+        if (!storedUser) {
+            setError("User not found");
+        } else if (storedUser.password !== password) {
+            setError("Invalid password");
         } else {
-            setError("Invalid email or password");
+            localStorage.setItem("isAuthenticated", "true");
+            localStorage.setItem("currentUser", email);
+            alert("Login successful!");
+            navigate("/Dashboard");
         }
     };
 

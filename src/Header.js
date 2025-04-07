@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 import logo from './logo.png';
 
 const Header = () => {
     const navigate = useNavigate();
-    const location = useLocation(); // Get the current location
+    // const location = useLocation(); // Get the current location
+
     const [isAuthenticated, setIsAuthenticated] = useState(false); // Initialize as false
 
     useEffect(() => {
@@ -26,18 +28,21 @@ const Header = () => {
             <div className="logo">
                 <img src={logo} alt="Red Cross Logo" />
                 <a href="/">Home</a>
+                <Link to="/Dashboard">Dashboard</Link>
+
+
             </div>
             <nav>
                 <div className="auth-buttons">
-                    {isAuthenticated && location.pathname !== "/login" ? ( // Check if authenticated and not on login page
+                    {isAuthenticated ? ( // Check if authenticated
                         <div className="user-info">
                             <span>Welcome, {user.name}</span>
-                            <button onClick={handleLogout}>Logout</button>
+                            <button onClick={handleLogout}>Logout</button> {/* Logout button */}
                         </div>
                     ) : (
                         <>
-                            <button><a href="/login">Login</a></button>
-                            <button><a href="/signup">SignUp</a></button>
+                            <Link to="/Login">Login</Link>
+                            <Link to="/signup">SignUp</Link>
                         </>
                     )}
                 </div>

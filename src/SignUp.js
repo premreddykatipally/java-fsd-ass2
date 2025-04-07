@@ -9,15 +9,26 @@ const Signup = () => {
     const [bloodGroup, setBloodGroup] = useState("");
     const [age, setAge] = useState("");
     const [location, setLocation] = useState("");
+    const [status, setStatus] = useState("active"); // New state for donation status
     const navigate = useNavigate();
 
     const handleSignup = (e) => {
         e.preventDefault();
 
         // Registration logic
-        const userData = { name, email, password, bloodGroup, age, location };
-        localStorage.setItem("user", JSON.stringify(userData)); // Store user details
-        localStorage.setItem("isAuthenticated", "true"); // Set authentication state
+        const userData = { 
+            name, 
+            email, 
+            password, 
+            bloodGroup, 
+            age, 
+            location, 
+            status,
+            timestamp: new Date().toISOString() 
+        };
+        localStorage.setItem(`user_${email}`, JSON.stringify(userData));
+        localStorage.setItem("currentUser", email);
+        localStorage.setItem("isAuthenticated", "true");
         alert("Signup successful! Please log in.");
         navigate("/login"); // Redirect to login page
     };
@@ -81,6 +92,10 @@ const Signup = () => {
                     required
                 />
                 
+                <select value={status} onChange={(e) => setStatus(e.target.value)} required>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
                 <button type="submit">Sign Up</button>
 
                 {/* Login Link */}

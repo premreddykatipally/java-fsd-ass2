@@ -8,8 +8,9 @@ const Footer = () => {
                 <a href="/contact">Contact</a>
                 <a href="/donation-guidelines">Donation Guidelines</a>
                 <a href="/faqs">FAQs</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms-of-service">Terms of Service</a>
+
             </div>
             <div className="contact-info">
                 <p>Email: <a href="mailto:info@donationproject.com">info@donationproject.com</a></p>
