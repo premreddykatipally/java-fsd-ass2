@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./SignUp.css";
+import axios from 'axios';
 
 const Signup = () => {
     const [name, setName] = useState("");
@@ -9,28 +10,46 @@ const Signup = () => {
     const [bloodGroup, setBloodGroup] = useState("");
     const [age, setAge] = useState("");
     const [location, setLocation] = useState("");
-    const [status, setStatus] = useState("active"); // New state for donation status
+    const [status, setStatus] = useState("active");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
 
-        // Registration logic
-        const userData = { 
-            name, 
-            email, 
-            password, 
-            bloodGroup, 
-            age, 
-            location, 
-            status,
-            timestamp: new Date().toISOString() 
-        };
-        localStorage.setItem(`user_${email}`, JSON.stringify(userData));
-        localStorage.setItem("currentUser", email);
-        localStorage.setItem("isAuthenticated", "true");
-        alert("Signup successful! Please log in.");
-        navigate("/login"); // Redirect to login page
+        try {
+            const userData = { 
+                name, 
+                email, 
+                password, 
+                bloodGroup, 
+                age, 
+                location, 
+                status,
+                timestamp: new Date().toISOString() 
+            };
+
+            const response = await axios.post('http://localhost:5000/api/users/register', userData, { withCredentials: true });
+            
+            if (response.data.success) {
+                localStorage.setItem("currentUser", email);
+                localStorage.setItem("isAuthenticated", "true");
+                alert("Signup successful! Please log in.");
+                navigate("/login");
+            } else {
+                setError(response.data.message || "Registration failed");
+            }
+    } catch (err) {
+        const errorMsg = err.response?.data?.message || 
+                        err.message || 
+                        "Registration failed. Please try again.";
+        setError(errorMsg);
+        console.error("Signup error details:", {
+            error: err,
+            response: err.response,
+            request: err.config
+        });
+        }
     };
 
     return (
@@ -97,6 +116,8 @@ const Signup = () => {
                     <option value="inactive">Inactive</option>
                 </select>
                 <button type="submit">Sign Up</button>
+                
+                {error && <p className="error-message">{error}</p>}
 
                 {/* Login Link */}
                 <p className="login-text">

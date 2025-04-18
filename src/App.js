@@ -1,15 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Header";
-import Donate from "./Donate"; // Import DonateOptions component
-
+import Donate from "./Donate";
 import LandingPage from "./LandingPage";
 import Footer from "./Footer";
-import Dashboard from "./Dashboard"; // Import Dashboard component
-
-import "./App.css";
+import Dashboard from "./Dashboard";
 import LoginPage from "./Login";
 import SignupPage from "./SignUp";
+import ProtectedRoute from "./components/ProtectedRoute";
+import "./App.css";
 
 const App = () => {
   return (
@@ -21,14 +20,16 @@ const App = () => {
             <Route path="/" element={<LandingPage />} />
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/Signup" element={<SignupPage />} />
-            <Route path="/Dashboard" element={<Dashboard />} /> {/* Add Dashboard route */}
-            <Route path="/Donate" element={<Donate />} /> {/* Add DonateOptions route */}
-
-
-            <Route path="/Donate" element={<Donate/>} /> {/* Add DonateOptions route */}
-
-
-
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/Donate" element={
+              <ProtectedRoute>
+                <Donate />
+              </ProtectedRoute>
+            } />
           </Routes>
         </div>
         <Footer />

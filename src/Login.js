@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import "./Login.css";
 
 const Login = () => {
@@ -8,22 +9,27 @@ const Login = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5000/api/users/login', {
+                email,
+                password
+            }, {
+                withCredentials: true
+            });
 
-        // Retrieve user data from local storage using same key pattern as SignUp
-        const storedUser = JSON.parse(localStorage.getItem(`user_${email}`));
-
-        // Validate credentials
-        if (!storedUser) {
-            setError("User not found");
-        } else if (storedUser.password !== password) {
-            setError("Invalid password");
-        } else {
-            localStorage.setItem("isAuthenticated", "true");
-            localStorage.setItem("currentUser", email);
-            alert("Login successful!");
-            navigate("/Dashboard");
+            if (response.data.success) {
+                localStorage.setItem('accessToken', response.data.accessToken);
+                // Store current user email in localStorage for Donate.js usage
+                localStorage.setItem('currentUser', JSON.stringify(response.data.user));
+                navigate("/dashboard");
+            } else {
+                setError(response.data.message || "Login failed");
+            }
+        } catch (err) {
+            setError(err.response?.data?.message || "Login failed. Please try again.");
+            console.error("Login error:", err);
         }
     };
 

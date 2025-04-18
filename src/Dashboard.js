@@ -5,7 +5,7 @@ const Dashboard = () => {
     const navigate = useNavigate();
 
     const handleRequest = () => {
-        const userData = JSON.parse(localStorage.getItem("user"));
+        const userData = JSON.parse(localStorage.getItem("user_"));
         if (userData) {
             alert(`User Details: ${userData.name}, ${userData.email}`);
             navigate('/Request');
@@ -15,7 +15,7 @@ const Dashboard = () => {
     };
 
     const handleDonate = () => {
-        navigate('/donate'); // Redirect to the Donate.js page
+        navigate('/Donate'); // Redirect to the Donate.js page
     };
 
     return (
